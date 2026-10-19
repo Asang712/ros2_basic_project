@@ -1,38 +1,47 @@
 import rclpy
 from rclpy.node import Node
-from turtlesim.srv import TeleportAbsolute
+from turtlesim.srv import Spawn
+import sys
 
-
-class TeleportClient(Node):
-    def __init__(self):
-        super().__init__('teleport_client')
-        # 创建客户端，目标服务 /turtle1/teleport_absolute
-        self.client = self.create_client(TeleportAbsolute, '/turtle1/teleport_absolute')
-
-        # 防御等待服务上线
+class SpawnArgClient(Node):
+    def __init__(self, x_pos, y_pos):
+        super().__init__('spawn_arg_client')
+        # 创建spawn客户端
+        self.client = self.create_client(Spawn, '/spawn')
+        # 等待服务上线
         while not self.client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info("等待 /turtle1/teleport_absolute 服务上线...")
+            self.get_logger().info("等待 /spawn 服务上线...")
 
-        # 构造瞬移请求参数
-        req = TeleportAbsolute.Request()
-        req.x = 7.0      # 目标x坐标
-        req.y = 7.0      # 目标y坐标
-        req.theta = 3.14 # 朝向，π弧度，面朝向左
+        # 构造请求，使用外部传入的坐标
+        req = Spawn.Request()
+        req.x = x_pos
+        req.y = y_pos
+        req.theta = 0.0
+        req.name = ""   # 空字符串，turtlesim自动分配名字，避免重名
 
-        # 异步发起调用
         future = self.client.call_async(req)
-        # 等待服务执行完成
         rclpy.spin_until_future_complete(self, future)
 
-        if future.result() is not None:
-            self.get_logger().info(f"✅turtle1瞬移完成，目标位置 x={req.x},y={req.y}")
-        else:
-            self.get_logger().error("❌瞬移调用失败！")
+        try:
+            resp = future.result()
+            self.get_logger().info(f"✅生成海龟成功！name={resp.name} x={x_pos} y={y_pos}")
+        except Exception as e:
+            self.get_logger().error(f"❌调用失败:{e}")
 
 
 def main(args=None):
     rclpy.init(args=args)
-    node = TeleportClient()
+    # sys.argv[0]是程序本身；argv[1]第一个参数，argv[2]第二个参数
+    if len(sys.argv) >=3:
+        input_x = float(sys.argv[1])
+        input_y = float(sys.argv[2])
+    else:
+        # 没有传参，使用默认值
+        input_x = 5.5
+        input_y = 5.5
+        print("未输入坐标参数，使用默认 x=5.5 y=5.5")
+
+    node = SpawnArgClient(input_x, input_y)
     node.destroy_node()
     rclpy.shutdown()
 
