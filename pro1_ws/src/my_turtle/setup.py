@@ -30,6 +30,7 @@ setup(
             'square_driver_02 = my_turtle.case_03_02_square_driver:main',
             'spawn_client = my_turtle.case_04_spawn_cilent:main',
             'loop_spawn_client = my_turtle.case_04_loop_spawn:main',
+            'teleport_client = my_turtle.case_04_teleport_client:main',
         ],
     },
 )
