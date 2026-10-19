@@ -1,6 +1,8 @@
 import rclpy
 from rclpy.node import Node
 from turtlesim.srv import Spawn  # 导入spawn服务类型
+import time  # 导入时间模块，用于等待2秒
+
 
 
 class SpawnClient(Node):
