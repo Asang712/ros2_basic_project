@@ -53,16 +53,17 @@ class SquareDriver(Node):
 
             # 判断转弯时间到达阈值
             if self.cycles >= TURN_CYCLES:
-                self.state = "GO"
+                self.state = "PAUSE"
                 self.cycles = 0
         
         elif self.state == "PAUSE":
-    msg.linear.x = 0.0
-    msg.angular.z = 0.0
-    self.cycles +=1
-    if self.cycles >= PAUSE_CYCLES:
-        self.state = "GO"
-        self.cycles =0
+            # 暂停状态
+            msg.linear.x = 0.0
+            msg.angular.z = 0.0
+            self.cycles +=1
+            if self.cycles >= PAUSE_CYCLES:
+                self.state = "GO"
+                self.cycles =0
 
 
         # 判断是否画完全部4条边
