@@ -18,7 +18,7 @@ class SpawnClient(Node):
         self.req.x = 3.0
         self.req.y = 3.0
         self.req.theta = 0.0
-        self.req.name = "turtle2"
+        self.req.name = "my_turtle"
 
         # 4.异步发起服务调用，得到future对象
         self.future = self.client.call_async(self.req)
