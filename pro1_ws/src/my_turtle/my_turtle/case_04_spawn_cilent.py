@@ -12,6 +12,7 @@ class SpawnClient(Node):
         # 2.防御等待：循环等待/spawn服务上线
         while not self.client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('等待 /spawn 服务上线...')
+        self.get_logger().info("✅服务就绪，开始每2秒生成海龟！")
 
         # 3.构造请求数据
         self.req = Spawn.Request()
@@ -38,6 +39,11 @@ class SpawnClient(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = SpawnClient()
+
+    while rclpy.ok():
+        node.send_spawn_request()
+        time.sleep(2)  # 等待2秒，再生成下一只
+
     rclpy.spin(node)   # 保持节点运行，等待服务响应回调触发
     node.destroy_node()
     rclpy.shutdown()
