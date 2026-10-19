@@ -28,6 +28,7 @@ setup(
             'pose_listener = my_turtle.case_02_pose_listener:main',
             'square_driver = my_turtle.case_03_square_driver:main',
             'square_driver_02 = my_turtle.case_03_02_square_driver:main',
+            'spawn_client = my_turtle.case_04_spawn_cilent:main',
         ],
     },
 )
