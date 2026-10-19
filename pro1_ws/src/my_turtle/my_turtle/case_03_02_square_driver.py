@@ -10,6 +10,7 @@ GO_CYCLES = 15           # 直行持续15个周期 → 1.5秒
 TURN_SPEED = math.pi / 2 # 转弯角速度 rad/s (90°每秒)
 TURN_CYCLES = 10         # 转弯持续10个周期 →1秒
 MAX_EDGE = 4             # 一共画4条边
+PAUSE_CYCLES = 10        # 暂停10个周期，等1秒
 
 
 class SquareDriver(Node):
@@ -24,6 +25,7 @@ class SquareDriver(Node):
         self.state = "GO"       # 两种状态：GO / TURN
         self.cycles = 0         # 当前状态已经运行的定时器次数
         self.edge = 0           # 已经完成的边数量
+        self.state = "GO"     # 初始状态为GO，开始直行
 
         self.get_logger().info("画正方形节点已启动！")
 
@@ -53,6 +55,15 @@ class SquareDriver(Node):
             if self.cycles >= TURN_CYCLES:
                 self.state = "GO"
                 self.cycles = 0
+        
+        elif self.state == "PAUSE":
+    msg.linear.x = 0.0
+    msg.angular.z = 0.0
+    self.cycles +=1
+    if self.cycles >= PAUSE_CYCLES:
+        self.state = "GO"
+        self.cycles =0
+
 
         # 判断是否画完全部4条边
         if self.edge >= MAX_EDGE:
