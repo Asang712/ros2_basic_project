@@ -27,6 +27,7 @@ setup(
             'circle_driver = my_turtle.case_01_circle_driver:main',
             'pose_listener = my_turtle.case_02_pose_listener:main',
             'square_driver = my_turtle.case_03_square_driver:main',
+            'square_driver_02 = my_turtle.case_03_02_square_driver:main',
         ],
     },
 )
