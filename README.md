@@ -85,3 +85,19 @@ source install/setup.bash
 ros2 run 包名 节点名
 ```
 ```
+
+---
+
+## 🎬 OpenCV 项目：视频镜头运动分析器（`OpenCV_ws/`）
+
+读取本地视频或 USB 摄像头实时流，使用 Shi-Tomasi 角点检测 + Lucas-Kanade 稀疏光流计算帧间运动向量，
+判断镜头运动状态（静止 / 横向移动 / 纵向移动 / 抖动），画面叠加特征点、运动箭头与状态 HUD，
+输出 CSV 运动日志，并支持简易防抖预览、自动标记剧烈抖动片段。
+
+```bash
+pip install -r OpenCV_ws/requirements.txt
+python3 OpenCV_ws/video_motion_analyzer.py --source 视频.mp4         # 本地视频
+python3 OpenCV_ws/video_motion_analyzer.py --source 0 --stabilize    # USB 摄像头
+```
+
+详见 [OpenCV_ws/README.md](OpenCV_ws/README.md)。
