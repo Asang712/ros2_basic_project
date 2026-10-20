@@ -31,6 +31,7 @@ setup(
             'spawn_client = my_turtle.case_04_spawn_cilent:main',
             'loop_spawn_client = my_turtle.case_04_loop_spawn:main',
             'teleport_client = my_turtle.case_04_teleport_client:main',
+            'teleport_server = my_turtle.case_05_teleport_server:main',
         ],
     },
 )
