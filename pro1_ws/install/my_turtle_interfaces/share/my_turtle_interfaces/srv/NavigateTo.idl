@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from my_turtle_interfaces/srv/NavigateTo.srv
+// generated code does not contain a copyright notice
+
+
+module my_turtle_interfaces {
+  module srv {
+    @verbatim (language="comment", text=
+      "===== Request 请求部分 =====")
+    struct NavigateTo_Request {
+      float x;
+
+      float y;
+
+      float theta;
+    };
+    @verbatim (language="comment", text=
+      "===== Response 响应部分 =====")
+    struct NavigateTo_Response {
+      boolean success;
+    };
+  };
+};

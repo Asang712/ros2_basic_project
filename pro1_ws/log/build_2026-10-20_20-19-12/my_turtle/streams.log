@@ -1,0 +1,65 @@
+[0.484s] Invoking command in '/home/asang/ros2_project/pro1_ws/src/my_turtle': AMENT_PREFIX_PATH=/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/asang/ros2_project/pro1_ws/build/my_turtle/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages:/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_turtle build --build-base /home/asang/ros2_project/pro1_ws/build/my_turtle/build install --record /home/asang/ros2_project/pro1_ws/build/my_turtle/install.log --install-scripts $base/lib/my_turtle --single-version-externally-managed install_data
+[0.627s] running egg_info
+[0.627s] creating ../../build/my_turtle/my_turtle.egg-info
+[0.636s] writing ../../build/my_turtle/my_turtle.egg-info/PKG-INFO
+[0.637s] writing dependency_links to ../../build/my_turtle/my_turtle.egg-info/dependency_links.txt
+[0.637s] writing entry points to ../../build/my_turtle/my_turtle.egg-info/entry_points.txt
+[0.637s] writing requirements to ../../build/my_turtle/my_turtle.egg-info/requires.txt
+[0.637s] writing top-level names to ../../build/my_turtle/my_turtle.egg-info/top_level.txt
+[0.637s] writing manifest file '../../build/my_turtle/my_turtle.egg-info/SOURCES.txt'
+[0.656s] reading manifest file '../../build/my_turtle/my_turtle.egg-info/SOURCES.txt'
+[0.656s] writing manifest file '../../build/my_turtle/my_turtle.egg-info/SOURCES.txt'
+[0.656s] running build
+[0.656s] running build_py
+[0.656s] creating /home/asang/ros2_project/pro1_ws/build/my_turtle/build
+[0.656s] creating /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib
+[0.657s] creating /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_04_spawn_cilent.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_04_loop_spawn.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_05_teleport_server.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_03_square_driver.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_03_02_square_driver.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/__init__.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_04_teleport_client.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_02_pose_listener.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] copying my_turtle/case_01_circle_driver.py -> /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle
+[0.657s] running install
+[0.661s] running install_lib
+[0.670s] creating /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.670s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_04_spawn_cilent.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.670s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_04_loop_spawn.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.670s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_05_teleport_server.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_03_square_driver.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_03_02_square_driver.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/__init__.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_04_teleport_client.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_02_pose_listener.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] copying /home/asang/ros2_project/pro1_ws/build/my_turtle/build/lib/my_turtle/case_01_circle_driver.py -> /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle
+[0.671s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_04_spawn_cilent.py to case_04_spawn_cilent.cpython-312.pyc
+[0.672s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_04_loop_spawn.py to case_04_loop_spawn.cpython-312.pyc
+[0.672s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_05_teleport_server.py to case_05_teleport_server.cpython-312.pyc
+[0.673s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_03_square_driver.py to case_03_square_driver.cpython-312.pyc
+[0.673s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_03_02_square_driver.py to case_03_02_square_driver.cpython-312.pyc
+[0.674s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/__init__.py to __init__.cpython-312.pyc
+[0.674s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_04_teleport_client.py to case_04_teleport_client.cpython-312.pyc
+[0.674s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_02_pose_listener.py to case_02_pose_listener.cpython-312.pyc
+[0.674s] byte-compiling /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle/case_01_circle_driver.py to case_01_circle_driver.cpython-312.pyc
+[0.675s] running install_data
+[0.675s] creating /home/asang/ros2_project/pro1_ws/install/my_turtle/share/ament_index
+[0.675s] creating /home/asang/ros2_project/pro1_ws/install/my_turtle/share/ament_index/resource_index
+[0.675s] creating /home/asang/ros2_project/pro1_ws/install/my_turtle/share/ament_index/resource_index/packages
+[0.675s] copying resource/my_turtle -> /home/asang/ros2_project/pro1_ws/install/my_turtle/share/ament_index/resource_index/packages
+[0.675s] copying package.xml -> /home/asang/ros2_project/pro1_ws/install/my_turtle/share/my_turtle
+[0.675s] running install_egg_info
+[0.685s] Copying ../../build/my_turtle/my_turtle.egg-info to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages/my_turtle-0.0.0-py3.12.egg-info
+[0.686s] running install_scripts
+[0.764s] Installing circle_driver script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.764s] Installing loop_spawn_client script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.764s] Installing pose_listener script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.765s] Installing spawn_client script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.765s] Installing square_driver script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.765s] Installing square_driver_02 script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.765s] Installing teleport_client script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.765s] Installing teleport_server script to /home/asang/ros2_project/pro1_ws/install/my_turtle/lib/my_turtle
+[0.765s] writing list of installed files to '/home/asang/ros2_project/pro1_ws/build/my_turtle/install.log'
+[0.791s] Invoked command in '/home/asang/ros2_project/pro1_ws/src/my_turtle' returned '0': AMENT_PREFIX_PATH=/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces:${CMAKE_PREFIX_PATH} DEBUGINFOD_URLS=https://debuginfod.ubuntu.com LD_LIBRARY_PATH=/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/asang/ros2_project/pro1_ws/build/my_turtle/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/asang/ros2_project/pro1_ws/install/my_turtle/lib/python3.12/site-packages:/home/asang/ros2_project/pro1_ws/install/my_turtle_interfaces/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_turtle build --build-base /home/asang/ros2_project/pro1_ws/build/my_turtle/build install --record /home/asang/ros2_project/pro1_ws/build/my_turtle/install.log --install-scripts $base/lib/my_turtle --single-version-externally-managed install_data
