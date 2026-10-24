@@ -1,0 +1,13 @@
+# ===== Goal (目标) =====
+float32 x            # 目标 X 坐标
+float32 y            # 目标 Y 坐标
+---
+# ===== Result (结果) =====
+bool success                 # 是否成功到达目标
+float32 traveled_distance    # 从起点到终点的实际路程
+float32 duration             # ★ 新增：任务耗时（秒）
+---
+# ===== Feedback (过程反馈) =====
+float32 remaining_distance   # 距目标剩余距离
+float32 heading_error        # 当前朝向与目标方向的偏差（弧度）
+float32 heading              # ★ 新增：海龟当前朝向（弧度）

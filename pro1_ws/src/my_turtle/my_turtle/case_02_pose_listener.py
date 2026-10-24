@@ -30,6 +30,7 @@ class PoseListener(Node):
         """
         # 节流打印
         current_time = self.get_clock().now()
+        self.count += 1
         if (current_time - self.last_print_time).nanoseconds > 1000000000:
             self.get_logger().info(
                 f"第{self.count}条消息: x={msg.x:.2f}, y={msg.y:.2f}, theta={msg.theta:.2f}, "

@@ -1,4 +1,5 @@
 from setuptools import find_packages, setup
+from glob import glob
 
 package_name = 'my_turtle'
 
@@ -10,6 +11,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/launch', glob('launch/*.py')),
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -32,6 +35,10 @@ setup(
             'loop_spawn_client = my_turtle.case_04_loop_spawn:main',
             'teleport_client = my_turtle.case_04_teleport_client:main',
             'teleport_server = my_turtle.case_05_teleport_server:main',
+            'keyboard_teleop = my_turtle.case_06_keyboard_teleop:main',
+            'param_circle_driver = my_turtle.case_07_param_circle_driver:main',
+            'navigate_action_server = my_turtle.case_08_navigate_action_server:main',
+            'navigate_action_client = my_turtle.case_08_navigate_action_client:main',
         ],
     },
 )
