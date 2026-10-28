@@ -12,7 +12,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/TeleportTo.srv"
   "action/Navigate.action"
   "action/Patrol.action"
-  DE
+  DEPENDENCIES geometry_msgs
 )
 
 ament_package()
