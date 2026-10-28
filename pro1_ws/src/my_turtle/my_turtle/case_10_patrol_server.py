@@ -19,11 +19,12 @@
 
 import math
 import threading
+import time
 
 import rclpy
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from rclpy.callback_groups import ReentrantCallbackGroup
-from rclpy.executors import MultiThreadedExecutor
+from rclpy.executors import MultiThreadedExecutor, SingleThreadedExecutor
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
@@ -38,6 +39,22 @@ def normalize_angle(angle: float) -> float:
     视觉上就是验收里说的「原地打转」。
     """
     return math.atan2(math.sin(angle), math.cos(angle))
+
+class PoseListener(Node):
+    """专用位姿监听节点（独立执行器）。
+
+    为什么单独拆一个节点：
+    patrol_server 主节点的 ActionServer 需要 MultiThreadedExecutor（execute_callback
+    会长时间阻塞，取消/目标服务得靠另一个线程处理）。但本机实测 MultiThreadedExecutor
+    处理 62Hz 的 /turtle1/pose 时吞吐会严重退化（3 秒只收到几十条），位姿流一旦被拖慢，
+    控制循环就只能拿到过期的数据。把订阅放到独立节点 + 单线程执行器后，实测稳定 62Hz。
+    """
+
+    def __init__(self, on_pose_callback):
+        super().__init__('patrol_pose_listener')
+        # 回调直接复用主节点的缓存逻辑（跨线程写入 _pose 并 set Event）
+        self.create_subscription(Pose, '/turtle1/pose', on_pose_callback, 10)
+
 
 class PatrolServer(Node):
     """巡逻任务的服务端：一个 Action Server + 一套航点控制循环。"""
@@ -77,12 +94,20 @@ class PatrolServer(Node):
 
         # ---------------- 3. 话题：订阅位姿、发布速度 ----------------
         self._cmd_pub = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
-        self.create_subscription(
-            Pose, '/turtle1/pose', self.on_pose, 10, callback_group=self._cb_group)
 
-        # 用 Rate 控制循环节拍：它内部是带超时的事件等待，不会像 time.sleep 那样
-        # 让整个线程彻底睡死，节点关闭时也能及时返回
-        self._rate = self.create_rate(self.control_frequency)
+        # 位姿订阅放在独立节点 + 独立单线程执行器里跑，避免被 ActionServer 的
+        # MultiThreadedExecutor 拖慢（详见 PoseListener 的注释）
+        self._pose_node = PoseListener(self.on_pose)
+        self._pose_executor = SingleThreadedExecutor()
+        self._pose_executor.add_node(self._pose_node)
+        self._pose_thread = threading.Thread(
+            target=self._pose_executor.spin, daemon=True)
+        self._pose_thread.start()
+
+        # 控制循环的节拍。注意不能用 self.create_rate()：Rate 依赖执行器定时器，
+        # 本机实测会被 62Hz 位姿流饿到 2~6Hz。这里只是给"我发出的指令"打拍，
+        # 等待位姿仍然是回调驱动的（Event），不是轮询。
+        self._period = 1.0 / self.control_frequency
 
         # ---------------- 4. Action Server ----------------
         self._server = ActionServer(
@@ -219,8 +244,8 @@ class PatrolServer(Node):
                         self.publish_feedback(goal_handle, index + 1, distance)
                     tick += 1
 
-                    # 控制循环节拍：Rate 内部是带超时的事件等待，不是 time.sleep
-                    self._rate.sleep()
+                    # 控制循环节拍（等待位姿靠 Event 回调，不在这里轮询）
+                    time.sleep(self._period)
 
                 if not arrived:
                     # rclpy 正在关闭：不再发速度指令，直接返回失败结果
