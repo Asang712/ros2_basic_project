@@ -39,6 +39,8 @@ setup(
             'param_circle_driver = my_turtle.case_07_param_circle_driver:main',
             'navigate_action_server = my_turtle.case_08_navigate_action_server:main',
             'navigate_action_client = my_turtle.case_08_navigate_action_client:main',
+            'patrol_client = my_turtle.case_10_patrol_client:main',
+            'patrol_server = my_turtle.case_10_patrol_server:main',
         ],
     },
 )
