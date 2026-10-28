@@ -3,6 +3,9 @@ build/
 install/
 log/
 
+# rosbag 录制输出
+*_bag/
+
 # Python
 __pycache__/
 *.py[cod]
