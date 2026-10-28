@@ -1,0 +1,12 @@
+# ===== Goal（任务目标）=====
+geometry_msgs/Point[] waypoints   # 按顺序经过的航点列表
+
+---
+# ===== Result（最终结果）=====
+bool success                      # 是否走完全部航点
+int32 waypoints_reached           # 实际走过的航点数量
+
+---
+# ===== Feedback（过程反馈）=====
+int32 current_waypoint            # 正在前往第几个航点（从 1 开始，方便打印 2/4）
+float32 remaining_distance        # 距当前航点还差多少米

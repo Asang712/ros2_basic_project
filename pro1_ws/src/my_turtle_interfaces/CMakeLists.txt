@@ -11,6 +11,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/NavigateTo.srv"
   "srv/TeleportTo.srv"
   "action/Navigate.action"
+  "action/Patrol.action"
+  DE
 )
 
 ament_package()
