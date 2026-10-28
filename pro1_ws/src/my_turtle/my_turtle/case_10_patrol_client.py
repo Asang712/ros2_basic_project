@@ -34,7 +34,8 @@ class PatrolClient(Node):
         # ---------------- 1. 参数：航点列表 + 超时 ----------------
         # 默认航线：一个绕场一周的矩形，全部落在 (0, 11) 的场地内
         self.declare_parameter('waypoints', [1.0, 1.0, 5.0, 1.0, 5.0, 5.0, 9.0, 5.0])
-        self.declare_parameter('timeout_sec', 30.0)   # 超过这个时间就主动取消
+        # 慢速模式走完这条航线约 28 秒，默认超时给 60 秒留足余量
+        self.declare_parameter('timeout_sec', 60.0)   # 超过这个时间就主动取消
 
         flat = [float(v) for v in self.get_parameter('waypoints').value]
         if len(flat) < 2 or len(flat) % 2 != 0:

@@ -10,11 +10,12 @@
   4. 收到取消请求时先发一次零速 Twist 让小车停稳，再返回 canceled 结果。
 
 设计要点（对应验收自查清单）：
-  * 用 Event 等第一帧位姿，用 create_rate() 控制循环节拍，不用 time.sleep() 轮询；
+  * 用 Event 等第一帧位姿（回调驱动），不用 while + sleep 轮询；
   * 角度差一律经过 normalize_angle() 归一化到 [-pi, pi]，避免跨 ±pi 时掉头绕远路；
   * 所有关键事件用 get_logger() 输出；
-  * execute_callback 在 ReentrantCallbackGroup + MultiThreadedExecutor 下运行，
-    这样它在跑控制循环时，位姿订阅和取消请求仍能被处理。
+  * execute_callback 在 MultiThreadedExecutor 的线程里跑控制循环，取消请求由另一个
+    线程处理；位姿订阅单独放在一个节点 + 单线程执行器里，保证 62Hz 不被拖慢；
+  * 循环只需给「发出的速度指令」打拍，等待位姿本身是 Event + 回调驱动的。
 """
 
 import math
@@ -283,13 +284,18 @@ class PatrolServer(Node):
         """发一次零速 Twist（全零即停车），满足「取消后安全停车」的验收点。"""
         self._cmd_pub.publish(Twist())
 
+    def shutdown_pose_listener(self):
+        """退出时先停掉位姿节点的执行器，避免回调打到正在销毁的节点上。"""
+        self._pose_executor.shutdown()
+        self._pose_node.destroy_node()
+
 def main(args=None):
     rclpy.init(args=args)
     node = PatrolServer()
 
-    # MultiThreadedExecutor 是必须的：execute_callback 会长时间占住一个线程，
-    # 单线程执行器下位姿订阅和取消请求都会饿死，海龟就动不起来了
-    executor = MultiThreadedExecutor()
+    # 这里的 num_threads=2 是有意的：一个线程跑 execute_callback（会阻塞整段巡逻），
+    # 另一个线程处理取消请求/参数服务。线程数别再放大，本机实测线程越多吞吐越差
+    executor = MultiThreadedExecutor(num_threads=2)
     executor.add_node(node)
 
     try:
@@ -299,6 +305,7 @@ def main(args=None):
     finally:
         if rclpy.ok():
             node.stop_turtle()   # 退出前再补一脚刹车
+        node.shutdown_pose_listener()
         executor.shutdown()
         node.destroy_node()
         if rclpy.ok():

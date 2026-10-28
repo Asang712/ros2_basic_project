@@ -66,7 +66,7 @@ def generate_launch_description():
             'mode', default_value='slow',
             description='速度模式：slow（慢速演示）或 fast（快速演示）'),
         DeclareLaunchArgument(
-            'timeout_sec', default_value='30.0',
-            description='client 主动取消任务的超时时间（秒）'),
+            'timeout_sec', default_value='60.0',
+            description='client 主动取消任务的超时时间（秒），慢速跑完约 28 秒'),
         OpaqueFunction(function=spawn_nodes),
     ])
