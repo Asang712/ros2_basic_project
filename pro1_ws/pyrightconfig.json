@@ -1,0 +1,13 @@
+{
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/build",
+    "**/install",
+    "**/log",
+    "**/.git",
+    "**/__pycache__",
+    "**/*.egg-info"
+  ]
+}

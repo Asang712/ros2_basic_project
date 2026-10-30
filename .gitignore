@@ -17,3 +17,6 @@ __pycache__/
 .idea/
 *.swp
 .DS_Store
+
+# Trae 内部产物
+.trae-html-share-packages/
